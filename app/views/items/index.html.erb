@@ -165,7 +165,23 @@ dress" value="" />
 <!-- Declare the array and store the values according to ur usage -->
 //var suggestions = new Array("bank", "back", "peter","hindu","huge", "test","bums","cat","kind","fight","argue","append","run","sad","silk","light","little","rate","orange","office","lucky","cable","monitor","narration","early","pick","put","hungry","gain","gift","java","junction","vegtable","fan","north","needle","winter","nation","carry","dance","danger","iteration","facile","yahoo","quick","quee","arrangement","vechicle","urban","xerox","zeebra","xML");
 
-var suggestions = new Array("soda","bread","sweets","sugar","basin","cup","fork","saviets","vaseline","towel","sanitory towel", "deodorant","bucket");
+var suggestions = new Array();
+
+</script>
+
+<%
+@itemlist = Items.select('name')
+$itemarray=[]
+@itemlist.each do |lname|
+  puts lname.name
+%>
+<script>
+  suggestions.push("<%= lname.name%>")
+</script>
+<%end%>
+
+
+<script type="text/javascript">
 
 
 
