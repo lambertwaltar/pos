@@ -20,7 +20,7 @@ require 'pathname'
 
   #read transaction log file
   def read_log
- 
+    send_data(File.open(File.join(Rails.root, '/public/transaction.log'), 'r'),:type => 'text/plain', :disposition => 'attachment', :filename => 'transaction.log')
 =begin
     file ='log/transaction.log'
     file.to_s
