@@ -171,12 +171,11 @@ var suggestions = new Array();
 
 <%
 @itemlist = Items.select('name')
-$itemarray=[]
-@itemlist.each do |lname|
-  puts lname.name
+@itemlist.each do |item|
+  puts item.name
 %>
 <script>
-  suggestions.push("<%= lname.name%>")
+  suggestions.push("<%= item.name%>")
 </script>
 <%end%>
 
