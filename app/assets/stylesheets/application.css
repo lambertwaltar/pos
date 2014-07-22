@@ -69,6 +69,7 @@
 body
 {
 	text-align: center;
+  overflow-y: scroll;
 
 }
 
@@ -97,8 +98,7 @@ legend
 	padding-right: 20px;
 	display:inline-block;
 	padding-top: 10px;
-	width: inherit;
-	
+	width: inherit;	
 }
 
 #logout
