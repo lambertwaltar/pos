@@ -48,29 +48,11 @@
   <div id="container" style="padding-left:100px;">
   <!-- ===========================================================================================-->
     <form name="test" id="test" action="/items/">
-      <div class='input-group.input-group-lg' style="margin-bottom:10px;"> 
+      <div class="form-control"> 
         <input type="text" name="text" autocomplete="off" id="item_search" class="form-control">
         <input type="text" name="quantity" placeholder="quantity" id="quantity" class="form-control">
         <input type="submit" value="Add To Cart" name="commit" class="btn btn-default"/>
-        <%= link_to "Clear Cart",  items_new_sale_path, class: "btn btn-default",method: :post, id: "new_sale"%>
-
-        <%if params[:text].present? %>    
-          <%if @items%>
-            <% @items.each do |item| %>
-              <div class="input-group-btn">
-                <table style="width:500px; float:left; padding-left:0px;">
-                  <tr style="background-color:#B1FFD4; height:15px;"><th>Name</th><th>Unit Price</th><th>Quantity</th></tr>
-                  <tr style="height:8px;"></tr>
-                  <tr style="background-color:#CDF5DF;height:10px;">
-                    <td><%= item.name%></td>
-                    <td><%= item.price %></td>
-                    <td><%= $quantity %></td>
-                    <td><%= link_to 'Add to Cart', items_cart_item_path(items_id: item.id), class: "btn btn-default", method: :post%></td>
-               </table>  
-              </div>
-            <%end%>
-          <%end%>
-        <% end%>
+        <%= link_to "Clear Cart",  items_new_sale_path, class: "btn btn-default",method: :post, id: "new_sale"%>       
       </div>
     </form>
     <!-- divs for the autocomplete text box-->
@@ -129,7 +111,7 @@
        	</button>
       </div>
     </div>
-    
+
   </div>
 </body>
 <script type="text/javascript">
