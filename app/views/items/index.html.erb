@@ -112,8 +112,14 @@
 				  
 			<%end%>
 
+    <form>
+
+      <input type="text" style="float:right;border:solid green; font-weight: bold;font-size:30px;padding-top:20px; width:150px; height:30px; margin-left:10px;" id="received" value="0">
+
+      <input type="text" value=<%= $total%> style="float:right;border:solid green; font-weight: bold;font-size: 30px;padding-top:20px; width:150px; height:30px; margin-left:10px;" readonly id="total">
+
       
-		<div style="float:right;border:solid green; font-weight: bold;font-size: 30px;padding-top:20px; width:150px; height:30px; margin-left:10px;"><%= $total%> </div>
+    </form>
 		</table>	
 	</div>		
 	
@@ -123,11 +129,11 @@
 			<button type="button" class="btn btn-default">
 
           <div align="center">
-        <form method="post" style="margin:0px" action="https://payments.yo.co.ug/webexpress/">
+        <form method="post" style="margin:0px" action="https://payments.yo.co.ug/webexpress/" onsubmit="mmtotal()">
                 <input type="image" name="submit" src="/mm1.PNG" height="50" style="border-radius:3px;"/>
                 <input type="hidden" name="bid" value="88" />
                 <input type="hidden" name="currency" value="UGX" />
-                <input type="hidden" name="amount" value=<%= $total%> />
+                <input type="hidden" name="amount" id="amount" value="" />
                 <input type="hidden" name="narrative" value="Pay for the service" />
                 <input type="hidden" name="reference" value="Payment" />
                 <input type="hidden" name="provider_reference_text" value="" />
@@ -161,10 +167,22 @@ dress" value="" />
 <!-- Copywrite of HIOXINDIA -->
 <!-- More scripts @ www.hscripts.com  -->
 
+//transaction calcs
+function mmtotal(){
+var total =  document.getElementById('total');
+var received =  document.getElementById('received');
 
-<!-- Declare the array and store the values according to ur usage -->
-//var suggestions = new Array("bank", "back", "peter","hindu","huge", "test","bums","cat","kind","fight","argue","append","run","sad","silk","light","little","rate","orange","office","lucky","cable","monitor","narration","early","pick","put","hungry","gain","gift","java","junction","vegtable","fan","north","needle","winter","nation","carry","dance","danger","iteration","facile","yahoo","quick","quee","arrangement","vechicle","urban","xerox","zeebra","xML");
+var newtotal = total.value
+var newreceived = received.value
 
+var inttotal = parseInt(newtotal)
+var intreceived = parseInt(newreceived)
+
+var totalpaid = inttotal-intreceived
+
+var amount= document.getElementById("amount");
+amount.value = totalpaid;
+}
 var suggestions = new Array();
 
 </script>
