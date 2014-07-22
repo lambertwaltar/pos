@@ -6,7 +6,7 @@
 
 <%end%>
 <legend> Administrator Options </legend>
-<div id="container">
+<div id="container" style="height:350px;">
 <div id="admin">
 
     <!-- button for creating a new user-->
@@ -36,7 +36,12 @@
     <!-- button for reading the transaction logs-->
     <div id="button">
         <button type="button" class="btn btn-default">
-            <%= button_to "View Transaction log", {:controller=>"admin",:action=>"read_log"}, class: "button"%>
+            <%= link_to 'View Transactions', root_url+'transaction.log', { target: '_blank' }%>
+        </button>
+    </div>
+    <div id="button">
+        <button type="button" class="btn btn-default">
+            <%= button_to "Download Transaction log", {:controller=>"admin",:action=>"read_log"}, class: "button"%>
         </button>
     </div>
 

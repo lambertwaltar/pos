@@ -130,6 +130,7 @@ button
 	margin: 10px;
 	height: 50px;
 	margin-top: 10px;
+  text-align: center;
 
 }
 #button
@@ -140,6 +141,7 @@ button
 	height: 50px;
 	color: #40D860;
 	padding: 0px;
+  text-align: center;
 
 }
 .button
@@ -155,6 +157,7 @@ button
 	color:green;
 	background: none;
 	border-radius: 5px;
+  text-align: center;
 
 }
 
@@ -405,7 +408,7 @@ textarea {
   }
   a,
   a:visited {
-    text-decoration: underline;
+    text-decoration: none;
   }
   a[href]:after {
     content: " (" attr(href) ")";
@@ -458,14 +461,16 @@ body {
 }
 
 a {
-  color: #0088cc;
+  color: green;
   text-decoration: none;
+  margin-left: 35px;
 }
 
 a:hover,
 a:focus {
-  color: #005580;
-  text-decoration: underline;
+  color: green;
+  text-decoration: none;
+  text-align: center;
 }
 
 .img-rounded {

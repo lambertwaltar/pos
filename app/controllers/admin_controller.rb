@@ -2,8 +2,6 @@ class AdminController < ApplicationController
 	
   #before_filter :confirm_admin, :except=>[:help]
 
-require 'pathname'
-
 	def index
 	end
 
@@ -21,18 +19,12 @@ require 'pathname'
   #read transaction log file
   def read_log
     send_data(File.open(File.join(Rails.root, '/public/transaction.log'), 'r').read,:type => 'text/plain', :disposition => 'attachment', :filename => 'transaction.log')
-=begin
-    file ='log/transaction.log'
-    file.to_s
-    s = File.read(File.join(Rails.root, file))
-    send_data s, :type => 'text/log', :disposition => 'inline'
-=end
     #send_data('log/transaction.log',:type => 'text/plain', :disposition => 'attachment', :filename => 'transaction.log')
 
   end
 
   def download_file
-    send_data f.read, :type => 'text/log', :disposition => 'attachment', :filename => "transaction.log"
+    send_data(File.open(File.join(Rails.root, '/public/transaction.log'), 'r').read,:type => 'text/plain', :disposition => 'attachment', :filename => 'transaction.log')
 
   end
 
