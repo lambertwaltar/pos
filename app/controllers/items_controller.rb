@@ -31,7 +31,7 @@ class ItemsController < ApplicationController
               @cart_item = CartItem.create!(:cart => initialize_cart, :items_id => items.id, :name=>items.name, :quantity => $quantity, :price => items.price, :subtotal=>$quantity.to_i*items.price.to_i)
               Items.update(items.id, :quantity => items.quantity.to_i-$quantity.to_i)
               logger = Logger.new(File.join(Rails.root, '/public/transaction.log'))
-              loggerinfo = File.open('transaction.log', 'r')
+              loggerinfo = File.open(File.join(Rails.root, '/public/transaction.log'), 'r')
               if loggerinfo == nil              
                 logger.info("Item   |   Quantity  |  Unit Price   |  Total    |   Cashier")
                 logger.info("------------------------------------------------------------")
