@@ -1,135 +1,116 @@
 
 <style type="text/css">
-
-.output
-{
-        font-family:Arial;
-        font-size: 12pt;
-        color:black;
-        padding-left: 3px;
-        padding-top: 3px;
-        border: 1px solid #000000;
-        width: 220px;
-        background: #B6F0D2;
-}
-.shadow
-{
-        width:102px;
-        position:relative;
-        top: 2px;
-        left: 2px;
-        background: #A2F5C2;
-}
-.shadow div{
-        position:relative;
-        top: -2px;
-        left: -2px;
-}
+  .output
+  {
+    font-family:Arial;
+    font-size: 12pt;
+    color:black;
+    padding-left: 3px;
+    padding-top: 3px;
+    border: 1px solid #000000;
+    width: 220px;
+    background: #B6F0D2;
+  }
+  .shadow
+  {
+    width:102px;
+    position:relative;
+    top: 2px;
+    left: 2px;
+    background: #A2F5C2;
+  }
+  .shadow div{
+    position:relative;
+    top: -2px;
+    left: -2px;
+  }
 </style>
 
 <body onLoad="init();">
   <% if flash[:notice]%>
-<div class="alert alert-success">
-<img src="/check.png" width="30" height="20"/> <%= flash[:notice]%>
-</div>
+    <div class="alert alert-success">
+      <img src="/check.png" width="30" height="20"/> <%= flash[:notice]%>
+    </div>
 
-<% elsif flash[:notice2]%>
-<div class="alert alert-danger">
-  <img src="/fail.png" width="30" height="20"/><%= flash[:notice2]%>
-</div>
+  <% elsif flash[:notice2]%>
+    <div class="alert alert-danger">
+      <img src="/fail.png" width="30" height="20"/><%= flash[:notice2]%>
+    </div>
 
-<% elsif flash[:notice1]%>
-<div class="alert alert-danger">
-  <img src="/fail.png" width="30" height="20"/><%= flash[:notice1]%>
-</div>
+  <% elsif flash[:notice1]%>
+    <div class="alert alert-danger">
+      <img src="/fail.png" width="30" height="20"/><%= flash[:notice1]%>
+    </div>
 
-<%end%>
+  <%end%>
+
   <legend>Purchase</legend>
   <div id="container" style="padding-left:100px;">
   <!-- ===========================================================================================-->
-<form name="test" id="test" action="/items/">
-  <div class='input-group.input-group-lg' style="margin-bottom:10px;"> 
+    <form name="test" id="test" action="/items/">
+      <div class='input-group.input-group-lg' style="margin-bottom:10px;"> 
+        <input type="text" name="text" autocomplete="off" id="item_search" class="form-control">
+        <input type="text" name="quantity" placeholder="quantity" id="quantity" class="form-control">
+        <input type="submit" value="Add To Cart" name="commit" class="btn btn-default"/>
+        <%= link_to "Clear Cart",  items_new_sale_path, class: "btn btn-default",method: :post, id: "new_sale"%>
 
-<input type="text" name="text" autocomplete="off" id="item_search" class="form-control">
-<input type="text" name="quantity" placeholder="quantity" id="quantity" class="form-control">
-<input type="submit" value="Add To Cart" name="commit" class="btn btn-default"/>
-<%= link_to "Clear Cart",  items_new_sale_path, class: "btn btn-default",method: :post, id: "new_sale"%>
-
-<%if params[:text].present? %>
-    
-        <%if @items%>
-
-          <% @items.each do |item| %>
-          <div class="input-group-btn">
-          <table style="width:500px; float:left; padding-left:0px;">
-             <tr style="background-color:#B1FFD4; height:15px;"><th>Name</th><th>Unit Price</th><th>Quantity</th></tr>
-
-             <tr style="height:8px;"></tr>
-
-          <tr style="background-color:#CDF5DF;height:10px;">
-            <td><%= item.name%></td>
-            <td><%= item.price %></td>
-            <td><%= $quantity %></td>
-            <td><%= link_to 'Add to Cart', items_cart_item_path(items_id: item.id), class: "btn btn-default", method: :post%></td>
-          </table>  
-          </div>
+        <%if params[:text].present? %>    
+          <%if @items%>
+            <% @items.each do |item| %>
+              <div class="input-group-btn">
+                <table style="width:500px; float:left; padding-left:0px;">
+                  <tr style="background-color:#B1FFD4; height:15px;"><th>Name</th><th>Unit Price</th><th>Quantity</th></tr>
+                  <tr style="height:8px;"></tr>
+                  <tr style="background-color:#CDF5DF;height:10px;">
+                    <td><%= item.name%></td>
+                    <td><%= item.price %></td>
+                    <td><%= $quantity %></td>
+                    <td><%= link_to 'Add to Cart', items_cart_item_path(items_id: item.id), class: "btn btn-default", method: :post%></td>
+               </table>  
+              </div>
+            <%end%>
           <%end%>
-        <%end%>
         <% end%>
       </div>
-
-</form>
-<!-- ===========================================================================================-->
-<div class="shadow" id="shadow">
-<div class="output" id="output">
-</div>
-</div>
-</body>         
-
-	<!-- 
-	========================================================
-	-->
- <legend>Customer Cart</legend>
-	<div class="input-group-btn">
-		<table style="width:500px; float:left; padding-left:0px;">
-			
-
-			<% if @item%>
-				<tr style="background-color:#B1FFD4; height:15px;"><th>Name</th><th>Quantity</th><th>Unit Price</th> <th>Total</th></tr>
-
-				<% @item.each do |item| %>
-
-					<tr style="height:8px;"></tr>
-
-					<tr style="background-color:#CDF5DF;height:10px;">
-						<td><%= item.name%></td>
-						<td><%= item.quantity%></td>
-						<td><%= item.price %></td>
-						<td><%= item.subtotal %></td>		
-					</tr>
-
-				<%end %>
-				  
-			<%end%>
-
-    <form>
-
-      <input type="text" style="float:right;border:solid green; font-weight: bold;font-size:30px;padding-top:20px; width:100px; height:30px; margin-left:10px;background-image:url('/amountpaid.png');" id="received" value="0" >
-
-      <input type="text" value=<%= $total%> style="float:right;border:solid green; font-weight: bold;font-size: 30px;padding-top:20px; width:100px; height:30px; margin-left:10px;background-image:url('/total.png');" readonly id="total">
-
-      
     </form>
-		</table>	
-	</div>		
+    <!-- divs for the autocomplete text box-->
+    <div class="shadow" id="shadow">
+      <div class="output" id="output">
+      </div>
+    </div>
+         
+
+    <legend>Customer Cart</legend>
+	  <div class="input-group-btn">
+		  <table style="width:500px; float:left; padding-left:0px;">
+		    <% if @item%>
+				  <tr style="background-color:#B1FFD4; height:15px;"><th>Name</th><th>Quantity</th><th>Unit Price</th> <th>Total</th></tr>
+				    <% @item.each do |item| %>
+              <tr style="height:8px;"></tr>
+              <tr style="background-color:#CDF5DF;height:10px;">
+                <td><%= item.name%></td>
+						    <td><%= item.quantity%></td>
+						    <td><%= item.price %></td>
+						    <td><%= item.subtotal %></td>		
+					    </tr>
+				    <%end %>		  
+			  <%end%>
+
+        <form>
+          <input type="text" style="float:right;border:solid green; font-weight: bold;font-size:30px;padding-top:20px; width:100px; height:30px; margin-left:10px;background-image:url('/amountpaid.png');" id="received" value="0" >
+
+          <input type="text" value=<%= $total%> style="float:right;border:solid green; font-weight: bold;font-size: 30px;padding-top:20px; width:100px; height:30px; margin-left:10px;background-image:url('/total.png');" readonly id="total">     
+        </form>
+
+		  </table>	
+	 </div>		
 	
 
-	<div id="transact">	
-		<div id="button">  	
-			<button type="button" class="btn btn-default">
-
+    <div id="transact">	
+    	<div id="button">  	
+    		<button type="button" class="btn btn-default">
           <div align="center">
-        <form method="post" style="margin:0px" action="https://payments.yo.co.ug/webexpress/" onsubmit="mmtotal()">
+            <form method="post" style="margin:0px" action="https://payments.yo.co.ug/webexpress/" onsubmit="mmtotal()">
                 <input type="image" name="submit" src="/mm1.PNG" height="50" style="border-radius:3px;"/>
                 <input type="hidden" name="bid" value="88" />
                 <input type="hidden" name="currency" value="UGX" />
@@ -139,27 +120,18 @@
                 <input type="hidden" name="provider_reference_text" value="" />
                 <input type="hidden" name="account" value="100181085271" />
                 <input type="hidden" name="return" value="http://point-of-sale-iconics.herokuapp.com/items" />
-                <input type="hidden" name="prefilled_payer_email_ad
-dress" value="" />
+                <input type="hidden" name="prefilled_payer_email_address" value="" />
                 <input type="hidden" name="prefilled_payer_mobile_payment_msisdn" value="" />
                 <input type="hidden" name="prefilled_payer_names" value="" />
                 <input type="hidden" name="abort_payment_url" value="" />
-
-        </form>  
-
-</div>
-
-   			</button>
-    	</div>
-	</div>
- 
-  <%= params[:amount]%>
-
-
-
-</div>
-
-
+            </form>  
+          </div>
+       	</button>
+      </div>
+    </div>
+    
+  </div>
+</body>
 <script type="text/javascript">
 
 
@@ -169,20 +141,22 @@ dress" value="" />
 
 //transaction calcs
 function mmtotal(){
-var total =  document.getElementById('total');
-var received =  document.getElementById('received');
+    var total =  document.getElementById('total');
+    var received =  document.getElementById('received');
 
-var newtotal = total.value
-var newreceived = received.value
+    var newtotal = total.value
+    var newreceived = received.value
 
-var inttotal = parseInt(newtotal)
-var intreceived = parseInt(newreceived)
+    var inttotal = parseInt(newtotal)
+    var intreceived = parseInt(newreceived)
 
-var totalpaid = inttotal-intreceived
+    var totalpaid = inttotal-intreceived
 
-var amount= document.getElementById("amount");
-amount.value = totalpaid;
+    var amount= document.getElementById("amount");
+    amount.value = totalpaid;
 }
+
+
 var suggestions = new Array();
 
 </script>
