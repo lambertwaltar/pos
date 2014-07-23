@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 
   #validating the form for creating new user
   validates :username, :presence => true, :uniqueness => true, :length => { :in => 3..20 }
-  validates :password, :confirmation => true #password_confirmation attr
+  validates :password, :confirmation => true #password_confirmation attribute
   validates_length_of :password, :in => 6..20, :on => :create
   validates :role, :presence => true
  
@@ -12,13 +12,14 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
   after_save :clear_fields
 
+  #method to encrypt user password
   def encrypt_password
     if password.present?
       self.salt = BCrypt::Engine.generate_salt
       self.encrypted_password= BCrypt::Engine.hash_secret(password, salt)
     end
   end
-
+  #method to clear fields
   def clear_fields
     self.password=nil
     self.username=nil

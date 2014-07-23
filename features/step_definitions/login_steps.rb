@@ -14,12 +14,9 @@ end
 
 Given(/^I fill in the item form$/) do
   visit items_path
-  	Items.reindex
-
-
   fill_in('text', :with => "soda")
   fill_in('quantity', :with => 2)
-  click_button "Search"	
+  click_button "Add To Cart"	
 end
 
 #add new user by admin

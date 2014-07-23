@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 
-  #before_filter :login_required
-  #before_filter :confirm_admin, :except=>[:index,:autocomplete]
+  before_filter :login_required
+  before_filter :confirm_admin, :except=>[:index,:autocomplete]
   protect_from_forgery
 
 
@@ -58,10 +58,8 @@ class ItemsController < ApplicationController
 
   return @items
     else
-    	#@items = Items.search(params[:query])
       myarray = Items.all
       @items = Kaminari.paginate_array(myarray).page(params[:page])
-     #@items = Items.all params[:query]
     end
   end
 
