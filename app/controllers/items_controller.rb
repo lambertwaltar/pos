@@ -16,6 +16,7 @@ class ItemsController < ApplicationController
       if params[:quantity].present?
         @items = Items.where(:name=>params[:text])
         $quantity = params[:quantity]
+        if $quantity.to_i > 0 
         
         if @items
           items = Items.find_by_name(params[:text])   
@@ -53,6 +54,9 @@ class ItemsController < ApplicationController
       
         redirect_to items_path
       end
+    else
+      flash[:notice1] = "Quantity is not an number"
+    end
     end
 
 
