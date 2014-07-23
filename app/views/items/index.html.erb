@@ -54,7 +54,7 @@
       <div class="form-control"> 
         <input type="text" name="text" autocomplete="off" id="item_search" class="form-control" placeholder="item name">
         <input type="text" name="quantity" placeholder="quantity" id="quantity" class="form-control">
-        <input type="submit" value="Add To Cart" name="commit" class="btn btn-default"/>
+        <input type="submit" value="Add To Cart" name="commit" class="btn btn-default" id ="addcart"/>
         <%= link_to "Clear Customer Cart",  items_new_sale_path, class: "btn btn-default",method: :post, id: "new_sale"%>       
       </div>
     </form>

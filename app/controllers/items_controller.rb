@@ -18,7 +18,7 @@ class ItemsController < ApplicationController
         $quantity = params[:quantity]
         
         if @items
-          items = Items.find_by_name(params[:text])    
+          items = Items.find_by_name(params[:text])   
           if items.quantity.to_i>$quantity.to_i
 
             if CartItem.exists?(:cart_id => initialize_cart.id, :name => items.name)
