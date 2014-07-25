@@ -58,6 +58,22 @@ Given(/^I click the view stock button$/) do
   click_button "View Available Stock"	
 end
 
+#veiw transaction logs
+#===========================================
+
+Given(/^I click the view transactions link$/) do
+  visit admin_index_path
+  click_link "View Transactions" 
+end
+
+#download transaction logs
+#===========================================
+
+Given(/^I click the download transacction logs button$/) do
+  visit admin_index_path
+  click_button "Download Transaction log" 
+end
+
 #help
 #===========================================
 

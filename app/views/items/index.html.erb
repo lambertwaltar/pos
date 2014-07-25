@@ -76,17 +76,18 @@
                 <td><%= item.name%></td>
 						    <td><%= item.quantity%></td>
 						    <td><%= item.price %></td>
-						    <td><%= item.subtotal %></td>		
+						    <td><%= item.subtotal %></td>	
+                <td><%= link_to "Delete", cart_path(item.id),method: :delete, data: {confirm: "Are you sure?" } %></td>	
 					    </tr>
 				    <%end %>		  
 			  <%end%>
 
         <!-- textboxes holding the amounts involved in the transaction-->
-        <form>
-          <input type="text" style="float:right;border:solid green; font-weight: bold;font-size:30px;padding-top:20px; width:100px; height:30px; margin-left:10px;background-image:url('/amountpaid.png');" id="received" value="0" >
+         <form method="post" style="margin:0px" action="https://payments.yo.co.ug/webexpress/" onsubmit="mmtotal()">
+          <input type="text" pattern="\d+" style="float:right;border:solid green; font-weight: bold;font-size:30px;padding-top:20px; width:100px; height:30px; margin-left:10px;background-image:url('/amountpaid.png');" id="received" value="0" >
 
           <input type="text" value=<%= $total%> style="float:right;border:solid green; font-weight: bold;font-size: 30px;padding-top:20px; width:100px; height:30px; margin-left:10px;background-image:url('/total.png');" readonly id="total">     
-        </form>
+
 
 		  </table>	
 	 </div>		
@@ -96,7 +97,7 @@
     	<div id="button">  	
     		<button type="button" class="btn btn-default">
           <div align="center">
-            <form method="post" style="margin:0px" action="https://payments.yo.co.ug/webexpress/" onsubmit="mmtotal()">
+           
               <input type="image" name="submit" src="/mm1.PNG" height="50" style="border-radius:3px;"/>
               <input type="hidden" name="bid" value="88" />
               <input type="hidden" name="currency" value="UGX" />

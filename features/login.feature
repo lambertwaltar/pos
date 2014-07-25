@@ -18,8 +18,16 @@ Feature: Use system
   Scenario: view stock
   	Given I click the view stock button
 
+  Scenario: view transaction log
+    Given I click the clear cart link
+    
+  Scenario: download transaction log
+    Given I click the clear cart link
+    
   Scenario: help
   	Given I click the help link
 
   Scenario: clear cart
     Given I click the clear cart link
+
+ 

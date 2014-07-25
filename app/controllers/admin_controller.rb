@@ -19,7 +19,7 @@ class AdminController < ApplicationController
   #read transaction log file
   def read_log
     send_data(File.open(File.join(Rails.root, '/public/transaction.log'), 'r').read,:type => 'text/plain', :disposition => 'attachment', :filename => 'transaction.log')
-    #send_data('log/transaction.log',:type => 'text/plain', :disposition => 'attachment', :filename => 'transaction.log')
+    
 
   end
 

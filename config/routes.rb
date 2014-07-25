@@ -3,6 +3,7 @@ Myapp::Application.routes.draw do
   resources :users
   resources :items
   resources :admin
+  resources :cart
   get "users/new"
   post "users/login"
   post "admin/new"
