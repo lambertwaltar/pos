@@ -18,7 +18,7 @@
         <!-- button for viewing system users-->
     	<div id="button">
         	<button type="button" class="btn btn-default">
-        		<%= button_to "View Registered users", users_view_user_path, class: "button" %>
+        		<%= button_to "View Registered users", view_user_path, class: "button",  method: :get%>
         	</button>	
      	</div>
         <!-- button for adding new items to store-->
@@ -30,18 +30,13 @@
         <!-- button for viewing available stock-->
       	<div id="button">
         	<button type="button" class="btn btn-default">
-        		<%= button_to "View Available Stock", items_view_stock_path, class: "button"%>
+        		<%= button_to "View Available Stock", view_stock_path, class: "button", method: :get%>
         	</button>
     	</div>
         <!-- button for reading the transaction logs-->
         <div id="button">
             <button type="button" class="btn btn-default">
-                <%= link_to 'View Transactions', root_url+'transaction.log', { target: '_blank' }%>
-            </button>
-        </div>
-        <div id="button">
-            <button type="button" class="btn btn-default">
-                <%= button_to "Download Transaction log", {:controller=>"admin",:action=>"read_log"}, class: "button"%>
+                <%= link_to 'View Transactions', view_transactions_path %>
             </button>
         </div>
     </div>

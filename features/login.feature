@@ -3,7 +3,6 @@ Feature: Use system
     Given they fill in the login form 
 
   Scenario: search item
-    Given they fill in the login form
     Given I fill in the item form
 
   Scenario: add new user

@@ -9,17 +9,15 @@ Myapp::Application.routes.draw do
   post "admin/new"
   get "log_out" => "users#logout", :as => "log_out"
   get "help" => "admin#help", :as => "help"
-  post "users/view_user"
-  post "items/view_stock"
+  get "view_user" => "users#view_user", :as => "view_user"
+  get "view_stock"=>"items#view_stock", :as =>"view_stock"
   post "items/cart_item"
   post "items/new_sale"
   post "items/transact"
-  post "admin/read_log"
-  post "admin/download_file"
   get "admin/show"
+  get "view_transactions" => "items#view_transactions", :as =>"view_transactions"
   #delete 'destroy' => 'items#destroy'
 
-  get "items/autocomplete"
 
   #get 'users/autocomplete_brand_name'
   #get 'items/autocomplete_brand_name', :on => :collection

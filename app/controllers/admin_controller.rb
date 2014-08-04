@@ -16,18 +16,6 @@ class AdminController < ApplicationController
   def help
   end
 
-  #read transaction log file
-  def read_log
-    send_data(File.open(File.join(Rails.root, '/public/transaction.log'), 'r').read,:type => 'text/plain', :disposition => 'attachment', :filename => 'transaction.log')
-    
-
-  end
-
-  def download_file
-    send_data(File.open(File.join(Rails.root, '/public/transaction.log'), 'r').read,:type => 'text/plain', :disposition => 'attachment', :filename => 'transaction.log')
-
-  end
-
   #create new system user
 	def create
     @user = User.new(params[:user].permit(:username, :role, :password, :password_confirmation))

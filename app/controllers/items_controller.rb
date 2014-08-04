@@ -34,22 +34,9 @@ class ItemsController < ApplicationController
               @cart_item = CartItem.create!(:cart => initialize_cart, :items_id => items.id, :name=>items.name, :quantity => $quantity, :price => items.price, :subtotal=>$quantity.to_i*items.price.to_i)
               #update the items table
               Items.update(items.id, :quantity => items.quantity.to_i-$quantity.to_i)
-              #create / open log file and write to it
-              logger = Logger.new(File.join(Rails.root, '/public/transaction.log'))
-              loggerinfo = File.open(File.join(Rails.root, '/public/transaction.log'), 'r')
-              if loggerinfo == nil              
-                logger.info("Item   |   Quantity  |  Unit Price   |  Total    |   Cashier")
-                logger.info("------------------------------------------------------------")
-
-                logger.info(items.name.to_s+"    |   "+$quantity.to_s+"    |   "+items.price.to_s+"    |   "+$total.to_s)
-                 logger.close
-              else
-                logger.info(items.name.to_s+"    |   "+$quantity.to_s+"    |   "+items.price.to_s+"    |   "+($quantity.to_i*items.price.to_i).to_s)
-                puts " hhaa"
-                logger.close
-              end
-                #flash message for the view
-                flash[:notice] = "Added #{items.name} to cart."
+              #record transactions into  table
+              @transactions = Transactions.create!(:name=>items.name, :quantity => $quantity, :price => items.price, :subtotal=>$quantity.to_i*items.price.to_i)
+              flash[:notice] = "Added #{items.name} to cart."
             end
 
           else
@@ -81,11 +68,6 @@ class ItemsController < ApplicationController
     redirect_to items_path
   end
 
-
-  def autocomplete
-    render json: Items.search(params[:query], fields: [{name: :text_start}], limit: 10).map(&:name)
-  end
-
   #display items
   def show
     @items=Items.all
@@ -99,6 +81,10 @@ class ItemsController < ApplicationController
   #display items
   def view_stock
     @items=Items.all
+  end
+
+   def view_transactions
+    @transactions = Transactions.all
   end
 
   #create new item and add it to database
@@ -122,7 +108,7 @@ class ItemsController < ApplicationController
   @item = Items.find(params[:id])
   if @item.destroy
     flash[:notice] = "Item deleted"
-      redirect_to items_view_stock_path
+      redirect_to view_stock_path
   else
     flash[:notice1] = "Failed to delete Item"
   end

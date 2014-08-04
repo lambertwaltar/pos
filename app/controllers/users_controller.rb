@@ -68,7 +68,7 @@ def destroy
   @user.destroy
   flash[:notice] = 'Deleted User '+ @user.username
   
-  redirect_to users_view_user_path
+  redirect_to view_user_path
 
 end
 

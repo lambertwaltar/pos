@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+     <script type="text/javascript">     
+        function PrintDiv() {    
+           var divToPrint = document.getElementById('container');
+           var popupWin = window.open('', '_blank', 'width=800,height=600');
+           popupWin.document.open();
+           popupWin.document.write('<html><head><title>Print Transactions</title></head><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
+            popupWin.document.close();
+                }
+     </script>
+   </head>   
+</html>
+
+
+
+
+<legend>Tranactions Details</legend>
+<div id="container" style = "width:700px">
+  <table style ="margin-left:10px; width:700px" >
+    <tr style="background-color:#B1FFD4; height:15px;width:700px;">
+      <th> Transaction id</th>
+      <th> Name</th>
+      <th> Price</th>
+      <th> Quantity</th>
+      <th> Total</th>
+      <th> Date</th>
+    </tr>
+
+    <% @transactions.each do |trans| %> <!-- traverse array holding items -->
+      <tr style="height:8px;"></tr>
+      <tr style="background-color:#D5F0D0;height:10px;color:#14311F;">
+        <td><%= trans.id %></td>
+        <td><%= trans.name %></td>
+        <td><%= trans.price %></td>
+        <td><%= trans.quantity%></td>
+        <td><%= trans.subtotal%></td>
+        <td><%= trans.created_at %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  
+</div>
+<div style = "padding-left:585px">
+    <%= link_to_function "Save  |  Print","PrintDiv();" %>
+  </div>
+<!-- link to the admin menu-->
+<div id="back">
+<%= link_to "Back", :controller=>"admin", :action=>"index" %>
+</div>

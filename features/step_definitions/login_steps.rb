@@ -4,8 +4,8 @@ require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "pat
 #===========================================
 Given(/^they fill in the login form$/) do
   visit users_path
-  fill_in('username', :with => "joan")
-  fill_in('password', :with => "zxcvbnm")
+  fill_in('username', :with => "sheila")
+  fill_in('password', :with => "asdfghjkl")
   click_button "Log in"
 end
 
@@ -15,7 +15,6 @@ end
 Given(/^I fill in the item form$/) do
   visit items_path
   fill_in('item_search', :with => "soda")
-  #fill_in('quantity', :with => 2)
   click_button "Add To Cart"	
 end
 
@@ -36,7 +35,7 @@ end
 
 Given(/^I fill in the new stock form$/) do
   visit new_item_path
-  fill_in('items_name', :with => "apple")
+  fill_in('items_name', :with => nil)
   fill_in('items_price', :with => 700)
   fill_in('items_quantity', :with => 25)
   click_button "Add Item"	
